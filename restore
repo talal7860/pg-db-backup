@@ -1,0 +1,5 @@
+#!/bin/bash
+
+./google-cloud-sdk/bin/gcloud auth activate-service-account --key-file service-account.json
+./google-cloud-sdk/bin/gsutil cp gs://$BUCKET_NAME/$FILENAME db.dump
+PGPASSWORD=$DATABASE_PASSWORD pg_restore -h $DATABASE_HOST -U $DATABASE_USERNAME --verbose --clean --no-acl --no-owner -d $DATABASE_NAME < db.dump

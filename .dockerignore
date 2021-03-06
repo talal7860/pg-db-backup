@@ -1,0 +1,6 @@
+Dockerfile
+*.md
+.dockerignore
+.git
+.gitignore
+*.json

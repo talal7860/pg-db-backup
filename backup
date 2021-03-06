@@ -1,0 +1,6 @@
+#!/bin/bash
+
+filename=$(date +"%s")-db.dump
+PGPASSWORD=$DATABASE_PASSWORD pg_dump -U $DATABASE_USERNAME -F c --verbose --clean --no-acl --no-owner -d $DATABASE_NAME -h $DATABASE_HOST > $filename
+./google-cloud-sdk/bin/gcloud auth activate-service-account --key-file service-account.json
+./google-cloud-sdk/bin/gsutil cp $filename gs://$BUCKET_NAME/
